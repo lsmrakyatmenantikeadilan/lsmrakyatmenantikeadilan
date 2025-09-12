@@ -1,73 +1,245 @@
-:root{
-  --accent:#1abc9c;
-  --dark:#2c3e50;
-  --muted:#f7fbfb;
-  --max-width:1100px;
-  --radius:10px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family: "Segoe UI", Roboto, Arial, sans-serif;color:#222;background:#fff;line-height:1.5}
-.wrap{max-width:var(--max-width);margin:0 auto;padding:22px}
-.site-header{background:var(--dark);color:#fff;padding:12px 0}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
-.branding h1{font-size:1.2rem;letter-spacing:0.6px}
-.motto{font-size:.9rem;color:#cfeee4;margin-top:6px}
-.main-nav{display:flex;gap:8px;flex-wrap:wrap}
-.main-nav a{color:#fff;padding:8px 12px;border-radius:6px;font-weight:600}
-.main-nav a:hover{background:var(--accent);color:#042}
-.hero{background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url('https://picsum.photos/1600/700?sig=12') center/cover no-repeat;color:#fff;padding:60px 0;text-align:center}
-.hero .lead{margin-top:12px;font-size:1.1rem}
-.cta{margin-top:18px}
-.btn{background:var(--accent);color:#042;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700;margin-right:8px;transition:0.3s}
-.btn:hover{opacity:0.85}
-.btn-outline{background:transparent;border:2px solid #fff;color:#fff}
-.section{padding:44px 0}
-.section.alt{background:#fbfdfe}
-h2{font-size:1.5rem;color:var(--dark);margin-bottom:12px;text-align:center}
-.card{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:0 6px 18px rgba(20,20,20,.06);margin-bottom:16px}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
-.member img{width:100%;height:180px;object-fit:cover;border-radius:8px 8px 0 0}
-.member h4{margin-top:10px}
-.role{font-weight:600;color:var(--accent)}
-.members-table{width:100%;border-collapse:collapse;margin-top:12px}
-.members-table th, .members-table td{padding:10px;border:1px solid #e6eef0;text-align:left}
-.members-table th{background:var(--accent);color:#fff}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-.gallery img{width:100%;height:150px;object-fit:cover;border-radius:8px}
-.form label{display:block;margin-bottom:10px;font-weight:600}
-.form input[type="text"], .form input[type="email"], .form input[type="number"], .form textarea{
-  width:100%;padding:8px;border-radius:6px;border:1px solid #dde7e9;margin-top:6px
-}
-.checkbox-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.required{color:#d33;margin-left:4px}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
-.site-footer{background:var(--dark);color:#fff;padding:18px 0;margin-top:24px;text-align:center}
-.site-footer .small{font-size:0.9rem;color:#cfeee4;margin-top:6px}
-.note{font-size:0.95rem;color:#666;margin-top:10px}
-.meta{font-size:0.9rem;color:#666;margin-top:10px}
-@media (max-width:800px){
-  .header-inner{flex-direction:column;align-items:flex-start}
-  .main-nav{width:100%;justify-content:flex-start}
-  .contact-grid{grid-template-columns:1fr}
+/* ======== VARIABEL WARNA & FONT ======== */
+:root {
+  --accent: #4CAF50; /* hijau daun muda */
+  --accent-dark: #388E3C;
+  --dark: #2c3e50;
+  --muted: #f7fbfb;
+  --max-width: 1100px;
+  --radius: 12px;
+  --font-heading: 'Lora', serif;
+  --font-body: 'Poppins', sans-serif;
 }
 
-/* Tambahan untuk halaman verifikasi */
-.verify-wrap{max-width:760px;margin:80px auto;text-align:center;padding:24px}
-.badge{display:inline-block;padding:12px 18px;border-radius:10px;background:#e9f9f3;color:#064;font-weight:700}
-.not-badge{display:inline-block;padding:12px 18px;border-radius:10px;background:#fff3f2;color:#b30000;border:1px solid #f5c2c2;font-weight:700}
-.member-info{margin-top:20px;text-align:left}
-.loading{font-style:italic;color:#666}
-.btn-group{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+/* ======== RESET & BODY ======== */
+* { box-sizing: border-box; margin: 0; padding: 0 }
+body {
+  font-family: var(--font-body);
+  color: #333;
+  background: #fff;
+  line-height: 1.7;
+  font-size: 16px;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+h2 { font-size: 1.8rem; margin-bottom: 1rem; text-align: center; }
+
+/* ======== LAYOUT ======== */
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ======== HEADER ======== */
+.site-header {
+  background: var(--accent);
+  color: #fff;
+  padding: 18px 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.branding h1 {
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+.motto {
+  font-size: 0.95rem;
+  color: #eafbea;
+  margin-top: 6px;
+  font-style: italic;
+}
+.main-nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.main-nav a {
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+.main-nav a:hover {
+  background: var(--accent-dark);
+}
+
+/* ======== HERO ======== */
+.hero {
+  background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
+    url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80')
+    center/cover no-repeat;
+  color: #fff;
+  padding: 80px 20px;
+  text-align: center;
+}
+.hero h2 {
+  color: #fff;
+  font-size: 2.2rem;
+}
+.hero .lead {
+  margin-top: 14px;
+  font-size: 1.1rem;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta { margin-top: 22px }
+.btn {
+  background: #fff;
+  color: var(--accent-dark);
+  padding: 12px 22px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+  display: inline-block;
+}
+.btn:hover { background: var(--accent-dark); color: #fff }
+.btn-outline {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.btn-outline:hover { background: #fff; color: var(--accent-dark) }
+
+/* ======== SECTION & CARD ======== */
+.section { padding: 60px 0 }
+.section.alt { background: #f4fdf6 }
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+  margin-bottom: 20px;
+}
+
+/* ======== GRID ======== */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 18px;
+}
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 18px;
+}
+.member img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+.member h4 { margin-top: 10px; }
+.role { font-weight: 600; color: var(--accent-dark) }
+
+/* ======== TABEL ANGGOTA ======== */
+.members-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+.members-table th, .members-table td {
+  padding: 12px;
+  border: 1px solid #e6eef0;
+  text-align: left;
+}
+.members-table th {
+  background: var(--accent-dark);
+  color: #fff;
+}
+
+/* ======== GALERI ======== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 14px;
+}
+.gallery img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ======== FORM ======== */
+.form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.form input, .form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dde7e9;
+  margin-top: 6px;
+  font-family: var(--font-body);
+}
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ======== KONTAK ======== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ======== FOOTER ======== */
+.site-footer {
+  background: var(--accent-dark);
+  color: #fff;
+  padding: 24px 0;
+  margin-top: 40px;
+  text-align: center;
+}
+.site-footer .small {
+  font-size: 0.9rem;
+  color: #cfeee4;
+  margin-top: 8px;
+}
+
+/* ======== LOGO ======== */
 .logo {
   display: block;
-  width: 160px;     /* atur besar logo */
-  height: 160px;    /* pastikan sama biar bulat */
-  border-radius: 50%; /* bikin bulat */
-  object-fit: cover; /* crop biar pas */
-  margin: 0 auto 14px; /* center */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* opsional: bayangan */
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 800px) {
+  .header-inner { flex-direction: column; align-items: flex-start }
+  .main-nav { width: 100%; justify-content: flex-start }
+  .contact-grid { grid-template-columns: 1fr }
+}
+
+
 
 
 
