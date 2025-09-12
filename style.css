@@ -255,6 +255,13 @@ h2 {
   height: auto;
   display: block;
 }
+.logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  background: yellow; /* cuma buat tes, bisa dihapus nanti */
+}
+
 
 
 
