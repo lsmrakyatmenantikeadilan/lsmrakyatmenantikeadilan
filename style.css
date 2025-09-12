@@ -233,29 +233,30 @@ h2 {
   .main-nav { justify-content: center; }
   .contact-grid { grid-template-columns: 1fr; }
 }
-/* ===== HEADER BRANDING ===== */
+
+/* Perbaikan logo agar muncul */
+.site-header {
+  background: #e8f5e9; /* hijau daun muda */
+  color: #1b5e20;
+  padding: 15px 0;
+}
+
 .branding {
   display: flex;
   align-items: center;
   gap: 15px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.branding img.logo {
-  height: 60px;
-  width: auto;
+.logo {
+  width: 100px;
+  height: auto;
+  display: block;
 }
 
-.branding-text h1 {
-  margin: 0;
-  font-size: 1.6rem;
-  line-height: 1.2;
-}
 
-.branding-text .motto {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 4px 0 0 0;
-}
 
 
 
