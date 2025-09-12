@@ -59,12 +59,15 @@ h2{font-size:1.5rem;color:var(--dark);margin-bottom:12px;text-align:center}
 .member-info{margin-top:20px;text-align:left}
 .loading{font-style:italic;color:#666}
 .btn-group{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-/* Logo styling */
 .logo {
   display: block;
-  max-width: 140px; /* atur lebar */
-  height: auto;
+  width: 160px;     /* atur besar logo */
+  height: 160px;    /* pastikan sama biar bulat */
+  border-radius: 50%; /* bikin bulat */
+  object-fit: cover; /* crop biar pas */
   margin: 0 auto 14px; /* center */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* opsional: bayangan */
 }
+
 
 
