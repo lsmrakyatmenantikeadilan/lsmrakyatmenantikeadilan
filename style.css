@@ -1,74 +1,146 @@
-:root {
-  --accent: #6BCB77;   /* hijau daun muda */
-  --dark: #2F5233;     /* hijau tua untuk header/footer */
-  --muted: #F6FFF8;    /* hijau muda sangat lembut untuk background alt */
-  --max-width: 1100px;
-  --radius: 10px;
-}
-
-* {box-sizing: border-box; margin: 0; padding: 0;}
-
+/* Style Umum */
 body {
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
-  color: #222;
-  background: #fff;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fff9;
+  color: #333;
   line-height: 1.6;
 }
 
-.wrap {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 22px;
-}
-
 /* Header */
-.site-header {
-  background: var(--dark); /* hijau tua */
-  color: #fff;
-  padding: 15px 0;
+header {
+  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  position: relative;
 }
 
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
+header .logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 70px;
 }
 
-.branding {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.branding .logo {
-  width: 100px; /* sesuaikan ukuran logo */
-  height: auto;
-  display: block;
-}
-
-.branding h1 {
-  font-size: 1.6rem;
-  letter-spacing: 0.6px;
-}
-
-.motto {
-  font-size: 1.2rem;
+header h1 {
+  margin: 0;
+  font-size: 2rem;
   font-weight: 700;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  margin-top: 8px;
 }
 
-/* Nav */
-.main-nav {
+header .slogan {
+  font-style: italic;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Navigasi */
+nav ul {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 10px;
 }
 
-.main-nav a {
-  color: #f
+nav ul li {
+  margin: 0;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+nav ul li a:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Section */
+section {
+  padding: 3rem 10%;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+section h2 {
+  color: #2E7D32;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  border-left: 6px solid #4CAF50;
+  padding-left: 10px;
+}
+
+section p, section li {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Tombol Umum */
+.btn, button {
+  display: inline-block;
+  background: #4CAF50;
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover, button:hover {
+  background: #2E7D32;
+  transform: translateY(-2px);
+}
+
+/* Form */
+form input, form textarea, form select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+form button {
+  width: 100%;
+}
+
+/* Footer */
+footer {
+  background: #2E7D32;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+
+/* Tombol kembali ke beranda */
+.back-home {
+  display: inline-block;
+  margin: 2rem auto;
+  text-align: center;
+  background: #388E3C;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.back-home:hover {
+  background: #1B5E20;
+  transform: translateY(-2px);
+}
+
