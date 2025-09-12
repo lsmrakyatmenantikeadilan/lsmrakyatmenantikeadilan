@@ -1,86 +1,65 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Verifikasi Keanggotaan RMK</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifikasi Keanggotaan - LSM RMK</title>
   <style>
-    .verify-wrap{max-width:760px;margin:80px auto;text-align:center;padding:24px}
-    .badge{display:inline-block;padding:12px 18px;border-radius:10px;background:#e9f9f3;color:#064;font-weight:700}
-    .not-badge{display:inline-block;padding:12px 18px;border-radius:10px;background:#fff3f2;color:#b30000;border:1px solid #f5c2c2;font-weight:700}
-    .member-info{margin-top:20px;text-align:left}
-    .loading{font-style:italic;color:#666}
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      padding: 20px;
+      text-align: center;
+    }
+    .card {
+      background: white;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: green;
+    }
+    .invalid {
+      color: red;
+    }
   </style>
 </head>
 <body>
-  <div class="verify-wrap card">
-    <h1>Verifikasi Keanggotaan — RMK</h1>
-    <p>Halaman ini menampilkan status keanggotaan berdasarkan kode di kartu anggota.</p>
-    <div id="resultArea">
-      <p class="loading">Memproses verifikasi...</p>
-    </div>
-    <div style="margin-top:18px">
-      <a href="index.html" class="btn">Kembali ke Beranda</a>
-    </div>
+  <div class="card" id="result">
+    <p>Sedang memverifikasi...</p>
   </div>
 
   <script>
-    // URL Web App Google Apps Script Anda
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-xaX8OKKxmtqcXI6QL6q0OexEoe-SgoFncpOcMOjDZkkARvg1RsNZjJujJLKJszD8RQ/exec";
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const resultDiv = document.getElementById("result");
 
-    // helper: baca query params
-    function getQueryParams(){
-      const qs = location.search.substring(1);
-      const params = {};
-      if(!qs) return params;
-      qs.split("&").forEach(part => {
-        const [k, v] = part.split("=");
-        params[decodeURIComponent(k)] = decodeURIComponent(v || "");
-      });
-      return params;
-    }
-
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]); }
-
-    (async function(){
-      const params = getQueryParams();
-      const area = document.getElementById('resultArea');
-
-      if(!params.code){
-        area.innerHTML = '<div class="not-badge">KODE TIDAK DITEMUKAN</div><p class="note">Tidak ada kode keanggotaan pada URL. Pastikan QR Code sudah benar.</p>';
-        return;
-      }
-
-      area.innerHTML = '<p class="loading">Memeriksa kode: <strong>' + escapeHtml(params.code) + '</strong> …</p>';
-
-      try {
-        // panggil Apps Script endpoint (GET ?code=...)
-        const resp = await fetch(APPS_SCRIPT_URL + '?code=' + encodeURIComponent(params.code));
-        if(!resp.ok) throw new Error('Gagal menghubungi server verifikasi');
-        const data = await resp.json();
-
-        if(data && data.status === 'verified'){
-          const member = data.member || {};
-          area.innerHTML = '<div class="badge">KEANGGOTAAN TERVERIFIKASI</div>' +
-            '<div class="member-info card">' +
-            '<h3>' + escapeHtml(member.name || 'Nama') + '</h3>' +
-            '<p><strong>ID Anggota:</strong> ' + escapeHtml(member.id || '-') + '</p>' +
-            '<p><strong>Jabatan:</strong> ' + escapeHtml(member.role || '-') + '</p>' +
-            '<p><strong>Tgl Terbit:</strong> ' + escapeHtml(member.issued || '-') + '</p>' +
-            '<p><strong>Catatan:</strong> ' + escapeHtml(member.note || '—') + '</p>' +
-            '</div>';
-        } else if(data && data.status === 'not_found'){
-          area.innerHTML = '<div class="not-badge">TIDAK DIVERIFIKASI</div><p class="note">Kode tidak ditemukan di database. Hubungi admin RMK.</p>';
+    // Ambil data anggota dari file JSON
+    fetch("anggota.json")
+      .then(response => response.json())
+      .then(data => {
+        if (data[code]) {
+          resultDiv.innerHTML = `
+            <h2>✅ Keanggotaan Terverifikasi</h2>
+            <p><strong>Nama:</strong> ${data[code].nama}</p>
+            <p><strong>Jabatan:</strong> ${data[code].jabatan}</p>
+            <p><strong>ID Anggota:</strong> ${code}</p>
+          `;
         } else {
-          area.innerHTML = '<div class="not-badge">GAGAL TERVERIFIKASI</div><p class="note">Respon tidak terduga dari server verifikasi.</p>';
+          resultDiv.innerHTML = `
+            <h2 class="invalid">❌ Kode Tidak Valid</h2>
+            <p>Kode anggota <strong>${code || "-"}</strong> tidak ditemukan dalam sistem.</p>
+          `;
         }
-      } catch(err){
-        console.error(err);
-        area.innerHTML = '<div class="not-badge">ERROR KONEKSI</div><p class="note">Tidak dapat terhubung ke server verifikasi. Silakan coba lagi nanti.</p>';
-      }
-    })();
+      })
+      .catch(error => {
+        resultDiv.innerHTML = `<p style="color:red;">Terjadi kesalahan: ${error}</p>`;
+      });
   </script>
 </body>
 </html>
+
 
