@@ -10,30 +10,8 @@ body{font-family: "Segoe UI", Roboto, Arial, sans-serif;color:#222;background:#f
 .wrap{max-width:var(--max-width);margin:0 auto;padding:22px}
 .site-header{background:var(--dark);color:#fff;padding:12px 0}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
-
-/* Branding (Logo + Judul + Motto) */
-.branding {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-.branding .logo {
-  height: 70px;   /* tinggi logo */
-  width: auto;    /* proporsional */
-  margin: 0;
-}
-.site-title h1 {
-  font-size: 1.3rem;
-  margin: 0;
-  color: #fff;
-}
-.site-title .motto {
-  font-size: 0.9rem;
-  margin: 2px 0 0;
-  color: #cfeee4;
-  font-style: italic;
-}
-
+.branding h1{font-size:1.2rem;letter-spacing:0.6px}
+.motto{font-size:.9rem;color:#cfeee4;margin-top:6px}
 .main-nav{display:flex;gap:8px;flex-wrap:wrap}
 .main-nav a{color:#fff;padding:8px 12px;border-radius:6px;font-weight:600}
 .main-nav a:hover{background:var(--accent);color:#042}
@@ -79,7 +57,6 @@ h2{font-size:1.5rem;color:var(--dark);margin-bottom:12px;text-align:center}
 .badge{display:inline-block;padding:12px 18px;border-radius:10px;background:#e9f9f3;color:#064;font-weight:700}
 .not-badge{display:inline-block;padding:12px 18px;border-radius:10px;background:#fff3f2;color:#b30000;border:1px solid #f5c2c2;font-weight:700}
 .member-info{margin-top:20px;text-align:left}
-
 .loading{font-style:italic;color:#666}
 .btn-group{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 /* Logo styling */
@@ -89,6 +66,5 @@ h2{font-size:1.5rem;color:var(--dark);margin-bottom:12px;text-align:center}
   height: auto;
   margin: 0 auto 14px; /* center */
 }
-
 
 
