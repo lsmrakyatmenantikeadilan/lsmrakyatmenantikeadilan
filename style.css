@@ -226,16 +226,6 @@ h2 {
 .note { font-size: 0.95rem; color: #666; margin-top: 10px; }
 .meta { font-size: 0.9rem; color: #666; margin-top: 10px; }
 
-/* Logo */
-.logo {
-  display: block;
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
 
 /* Responsif */
 @media (max-width: 800px) {
@@ -243,4 +233,29 @@ h2 {
   .main-nav { justify-content: center; }
   .contact-grid { grid-template-columns: 1fr; }
 }
+/* ===== HEADER BRANDING ===== */
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.branding img.logo {
+  height: 60px;
+  width: auto;
+}
+
+.branding-text h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.branding-text .motto {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 4px 0 0 0;
+}
+
+
 
