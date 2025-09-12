@@ -1,63 +1,29 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verifikasi Keanggotaan - LSM RMK</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .verify-wrap {max-width:760px;margin:80px auto;text-align:center;padding:24px}
-    .badge {display:inline-block;padding:12px 18px;border-radius:10px;background:#e9f9f3;color:#064;font-weight:700}
-    .not-badge {display:inline-block;padding:12px 18px;border-radius:10px;background:#fff3f2;color:#b30000;border:1px solid #f5c2c2;font-weight:700}
-    .member-info {margin-top:20px;text-align:left}
-    .loading {font-style:italic;color:#666}
-    .btn-group {margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-  </style>
-</head>
-<body>
-  <div class="verify-wrap card">
-      <img src="logo.png" alt="Logo LSM RMK" class="logo" />
-    <h1>Verifikasi Keanggotaan — RMK</h1>
-    <p>Halaman ini menampilkan status keanggotaan berdasarkan kode di kartu anggota.</p>
-    <div id="resultArea">
-      <p class="loading">Memproses verifikasi...</p>
-    </div>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("id"); // konsisten pakai ?id=RMK-0001
+  const resultDiv = document.getElementById("resultArea");
 
-    <div class="btn-group">
-      <!-- Tombol resmi kembali ke beranda -->
-      <a href="https://lsmrakyatmenantikeadilan.github.io/lsmrakyatmenantikeadilan/" class="btn">🏠 Kembali ke Beranda</a>
-      <a href="keanggotaan.html" class="btn">🔎 Cek Anggota Lain</a>
-    </div>
-  </div>
+  fetch("anggota.json")
+    .then(response => response.json())
+    .then(data => {
+      if (data[code]) {
+        resultDiv.innerHTML = `
+          <div class="badge">✅ KEANGGOTAAN TERVERIFIKASI</div>
+          <div class="member-info card">
+            <h3>${data[code].nama}</h3>
+            <p><strong>ID Anggota:</strong> ${code}</p>
+            <p><strong>Jabatan:</strong> ${data[code].jabatan}</p>
+          </div>
+        `;
+      } else {
+        resultDiv.innerHTML = `
+          <div class="not-badge">❌ KODE TIDAK VALID</div>
+          <p class="note">Kode anggota <strong>${code || "-"}</strong> tidak ditemukan dalam sistem.</p>
+        `;
+      }
+    })
+    .catch(error => {
+      resultDiv.innerHTML = `<p style="color:red;">Terjadi kesalahan: ${error}</p>`;
+    });
+</script>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("code");
-    const resultDiv = document.getElementById("resultArea");
-
-    // Ambil data anggota dari file JSON
-    fetch("anggota.json")
-      .then(response => response.json())
-      .then(data => {
-        if (data[code]) {
-          resultDiv.innerHTML = `
-            <div class="badge">✅ KEANGGOTAAN TERVERIFIKASI</div>
-            <div class="member-info card">
-              <h3>${data[code].nama}</h3>
-              <p><strong>ID Anggota:</strong> ${code}</p>
-              <p><strong>Jabatan:</strong> ${data[code].jabatan}</p>
-            </div>
-          `;
-        } else {
-          resultDiv.innerHTML = `
-            <div class="not-badge">❌ KODE TIDAK VALID</div>
-            <p class="note">Kode anggota <strong>${code || "-"}</strong> tidak ditemukan dalam sistem.</p>
-          `;
-        }
-      })
-      .catch(error => {
-        resultDiv.innerHTML = `<p style="color:red;">Terjadi kesalahan: ${error}</p>`;
-      });
-  </script>
-</body>
-</html>
