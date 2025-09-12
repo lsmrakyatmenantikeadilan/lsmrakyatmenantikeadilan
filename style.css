@@ -82,5 +82,13 @@ h2{font-size:1.5rem;color:var(--dark);margin-bottom:12px;text-align:center}
 
 .loading{font-style:italic;color:#666}
 .btn-group{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+/* Logo styling */
+.logo {
+  display: block;
+  max-width: 140px; /* atur lebar */
+  height: auto;
+  margin: 0 auto 14px; /* center */
+}
+
 
 
